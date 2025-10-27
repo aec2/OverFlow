@@ -46,8 +46,6 @@ public static class WolverineExtensions
             });
         }
         
-        
-        
         builder.Services.AddOpenTelemetry().WithTracing(traceProviderBuilder =>
         {
             traceProviderBuilder.SetResourceBuilder(ResourceBuilder.CreateDefault()
@@ -57,14 +55,12 @@ public static class WolverineExtensions
         
         builder.UseWolverine(opts =>
         {
-            opts.UseRabbitMqUsingNamedConnection("messaging")
-                .AutoProvision()
+            opts.UseRabbitMqUsingNamedConnection("messaging").AutoProvision()
                 .UseConventionalRouting(x =>
                 {
                     x.QueueNameForListener(t => $"{t.FullName}." +
                                                 $"{builder.Environment.ApplicationName}");
                 });
-            
             configureMessaging(opts);
         });
     }
