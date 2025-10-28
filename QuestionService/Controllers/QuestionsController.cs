@@ -34,7 +34,8 @@ public class QuestionsController(QuestionDbContext db, IMessageBus bus, TagServi
             Title = dto.Title,
             Content = dto.Content,
             TagSlugs = dto.Tags,
-            AskerId = userId
+            AskerId = userId,
+            AskerDisplayName = name
         };
 
         db.Questions.Add(question);
@@ -137,6 +138,7 @@ public class QuestionsController(QuestionDbContext db, IMessageBus bus, TagServi
         {
             Content = dto.Content,
             UserId = userId,
+            UserDisplayName = name,
             QuestionId = questionId
         };
         
