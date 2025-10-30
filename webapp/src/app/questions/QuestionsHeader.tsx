@@ -22,7 +22,7 @@ export default function QuestionsHeader({tag, total}: Props) {
                 <div className='text-3xl font-semibold'>
                     {tag ? `[${tag}]` : 'Newest Questions'}
                 </div>
-                <Button as={Link} href='/questions/ask' color='secondary'>
+                <Button as="a" href='/questions/ask' color='secondary'>
                     Ask Question
                 </Button>
             </div>

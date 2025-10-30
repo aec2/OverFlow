@@ -2,6 +2,7 @@ import Link from "next/link";
 import {AcademicCapIcon, MagnifyingGlassIcon} from "@heroicons/react/24/solid";
 import {Input} from "@heroui/input";
 import {Button} from "@heroui/button";
+import ThemeToggle from "@/components/nav/ThemeToggle";
 
 export default function TopNav() {
     return (
@@ -33,6 +34,7 @@ export default function TopNav() {
                     />
                 </div>
                 <div className='flex basis-1/4 shrink-0 justify-end gap-3'>
+                    <ThemeToggle/>
                     <Button color="secondary" variant="bordered">Login</Button>
                     <Button color="secondary" >Register</Button>
                 </div>
