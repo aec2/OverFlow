@@ -1,20 +1,34 @@
 'use client';
 
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider, ToastProvider} from "@heroui/react";
+import {ReactNode, useEffect} from "react";
 import {useRouter} from "next/navigation";
 import {ThemeProvider} from "next-themes";
+import {useTagStore} from "@/lib/useTagStore";
+import {getTags} from "@/lib/actions/tag-actions";
 
+export default function Providers({children}: {children: ReactNode}) {
+    const router = useRouter();
+    const setTags = useTagStore(state => state.setTags);
 
-export default function Providers({children}: {children: React.ReactNode}) {
-  const router = useRouter();
-  
-  return (
-    <HeroUIProvider navigate={router.push}  className="h-full flex flex-col">
-      <ThemeProvider 
-          attribute='class'
-          defaultTheme='light'>
-        {children}
-      </ThemeProvider>
-    </HeroUIProvider>
-  )
+    useEffect(() => {
+        const loadTags = async () => {
+            const {data: tags} = await getTags();
+            if (tags) setTags(tags);
+        }
+
+        void loadTags();
+    }, [setTags])
+
+    return (
+        <HeroUIProvider navigate={router.push} className="h-full flex flex-col">
+            <ToastProvider />
+            <ThemeProvider
+                attribute='class'
+                defaultTheme='light'
+            >
+                {children}
+            </ThemeProvider>
+        </HeroUIProvider>
+    );
 }
