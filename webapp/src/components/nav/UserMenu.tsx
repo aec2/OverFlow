@@ -14,13 +14,12 @@ export default function UserMenu({ user }: Props) {
         <Dropdown>
             <DropdownTrigger>
                 <div className='flex items-center gap-2 cursor-pointer'>
-                    <Avatar suppressHydrationWarning
-                            color='secondary' size='sm' name={user.displayName?.charAt(0)} />
-                    {user.displayName}
+                    <Avatar color='secondary' size='sm' name={user.name?.charAt(0)} />
+                    {user.name}
                 </div>
             </DropdownTrigger>
             <DropdownMenu>
-                <DropdownItem href={`/profiles/${user.id}`} key='edit'>My Profile</DropdownItem>
+                <DropdownItem key='edit'>Edit Profile</DropdownItem>
                 <DropdownItem
                     onClick={() => signOut({redirectTo: '/'})}
                     key='logout'
